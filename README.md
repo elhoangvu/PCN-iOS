@@ -10,7 +10,7 @@ A ported implementation of PCN face detection on caffe for iOS devices. Get from
 ## Results (on iPhone 6S+)
 - iPhone 6S+
 - Camera capture preset: 640x480
-- Below talbe is a record about quick PCN bendmark on iPhone 6S+.
+- Below talbe is a record about quick PCN benchmarks on iPhone 6S+.
 
 | Min face size | Number of faces| FPS ~      |
 | --------------|:--------------:|-----------:|
