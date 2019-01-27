@@ -192,6 +192,8 @@
 		B712AA4F21FDC7A900FC65BD /* net.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B712A92221FDC7A800FC65BD /* net.cpp */; };
 		B712AA5021FDC7A900FC65BD /* solver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B712A92321FDC7A800FC65BD /* solver.cpp */; };
 		B712AA5121FDC7A900FC65BD /* syncedmem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B712A92421FDC7A800FC65BD /* syncedmem.cpp */; };
+		B721B96721FE12F200100D25 /* PCN-Tracking.caffemodel in Resources */ = {isa = PBXBuildFile; fileRef = B721B96521FE12F200100D25 /* PCN-Tracking.caffemodel */; };
+		B721B96821FE12F200100D25 /* PCN-Tracking.prototxt in Resources */ = {isa = PBXBuildFile; fileRef = B721B96621FE12F200100D25 /* PCN-Tracking.prototxt */; };
 		B747E40321FD77AB00DE9CE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B747E40221FD77AB00DE9CE2 /* AppDelegate.m */; };
 		B747E40621FD77AB00DE9CE2 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B747E40521FD77AB00DE9CE2 /* ViewController.mm */; };
 		B747E40921FD77AB00DE9CE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B747E40721FD77AB00DE9CE2 /* Main.storyboard */; };
@@ -623,6 +625,8 @@
 		B712A92221FDC7A800FC65BD /* net.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = net.cpp; sourceTree = "<group>"; };
 		B712A92321FDC7A800FC65BD /* solver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = solver.cpp; sourceTree = "<group>"; };
 		B712A92421FDC7A800FC65BD /* syncedmem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = syncedmem.cpp; sourceTree = "<group>"; };
+		B721B96521FE12F200100D25 /* PCN-Tracking.caffemodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PCN-Tracking.caffemodel"; sourceTree = "<group>"; };
+		B721B96621FE12F200100D25 /* PCN-Tracking.prototxt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "PCN-Tracking.prototxt"; sourceTree = "<group>"; };
 		B747E3FE21FD77AB00DE9CE2 /* PCN-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PCN-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B747E40121FD77AB00DE9CE2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B747E40221FD77AB00DE9CE2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1419,6 +1423,8 @@
 		B747E49F21FD792200DE9CE2 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				B721B96521FE12F200100D25 /* PCN-Tracking.caffemodel */,
+				B721B96621FE12F200100D25 /* PCN-Tracking.prototxt */,
 				B747E4A021FD792200DE9CE2 /* PCN-2.prototxt */,
 				B747E4A121FD792200DE9CE2 /* PCN-3.prototxt */,
 				B747E4A221FD792200DE9CE2 /* PCN-1.prototxt */,
@@ -1516,6 +1522,7 @@
 				B747E40B21FD77AC00DE9CE2 /* Assets.xcassets in Resources */,
 				B712A96E21FDC7A800FC65BD /* softmax_loss_layer.cu in Resources */,
 				B712A9CA21FDC7A800FC65BD /* inner_product_layer.cu in Resources */,
+				B721B96821FE12F200100D25 /* PCN-Tracking.prototxt in Resources */,
 				B712A98421FDC7A800FC65BD /* scale_layer.cu in Resources */,
 				B712A9A521FDC7A800FC65BD /* cudnn_pooling_layer.cu in Resources */,
 				B712A97E21FDC7A800FC65BD /* log_layer.cu in Resources */,
@@ -1542,6 +1549,7 @@
 				B712A9AD21FDC7A800FC65BD /* cudnn_tanh_layer.cu in Resources */,
 				B712A9B021FDC7A800FC65BD /* bnll_layer.cu in Resources */,
 				B712A98D21FDC7A800FC65BD /* tile_layer.cu in Resources */,
+				B721B96721FE12F200100D25 /* PCN-Tracking.caffemodel in Resources */,
 				B712A96821FDC7A800FC65BD /* batch_reindex_layer.cu in Resources */,
 				B712A9B821FDC7A800FC65BD /* slice_layer.cu in Resources */,
 				B712AA3B21FDC7A900FC65BD /* im2col.cu in Resources */,

@@ -38,7 +38,7 @@ using namespace cv;
     
     self.videoCamera = [[CvVideoCamera alloc] initWithParentView:self.cameraView];
     self.videoCamera.delegate = self;
-    self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
+    self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
     self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset640x480;
     self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
     self.videoCamera.defaultFPS = 30;
@@ -49,12 +49,17 @@ using namespace cv;
     std::string pcnPath1 = [bundle pathForResource:@"PCN-1" ofType:@"prototxt"].UTF8String;
     std::string pcnPath2 = [bundle pathForResource:@"PCN-2" ofType:@"prototxt"].UTF8String;
     std::string pcnPath3 = [bundle pathForResource:@"PCN-3" ofType:@"prototxt"].UTF8String;
+    std::string pcnPath4 = [bundle pathForResource:@"PCN-Tracking" ofType:@"caffemodel"].UTF8String;
+    std::string pcnPath5 = [bundle pathForResource:@"PCN-Tracking" ofType:@"prototxt"].UTF8String;
     
-    // You must free 'detector' point when needed
-    detector = new PCN(pcnPath, pcnPath1, pcnPath2, pcnPath3);
-    detector->SetMinFaceSize(85);
-    detector->SetScoreThresh(0.37, 0.43, 0.95);
+    // You must free 'detector' pointer when needed
+    detector = new PCN(pcnPath, pcnPath1, pcnPath2, pcnPath3, pcnPath4, pcnPath5);
+    detector->SetMinFaceSize(45);
     detector->SetImagePyramidScaleFactor(1.414);
+    detector->SetDetectionThresh(0.37, 0.43, 0.97);
+    /// tracking
+    detector->SetTrackingPeriod(30);
+    detector->SetTrackingThresh(0.95);
     detector->SetVideoSmooth(true);
 }
 
@@ -69,7 +74,7 @@ using namespace cv;
     }
     
     NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
-    auto faces = detector->DetectFace(image);
+    auto faces = detector->DetectTrack(image);
     NSTimeInterval end = [NSDate timeIntervalSinceReferenceDate];
     
     NSString* fps = [NSString stringWithFormat:@"FPS: %f", 1.0f/(end - start)];

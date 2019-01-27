@@ -7,6 +7,7 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
+#include <iomanip>
 
 #include "opencv2/opencv.hpp"
 #include "caffe/caffe.hpp"
@@ -15,12 +16,12 @@
 #define CLAMP(x, l, u)  ((x) < (l) ? (l) : ((x) > (u) ? (u) : (x)))
 #define EPS  1e-5
 
-struct PCNWindow
+struct Window
 {
     int x, y, width;
     float angle, score;
-    PCNWindow(int x_, int y_, int w_, float a_, float s_)
-        : x(x_), y(y_), width(w_), angle(a_), score(s_)
+    Window(int x_, int y_, int w_, float a_, float s_)
+    : x(x_), y(y_), width(w_), angle(a_), score(s_)
     {}
 };
 
@@ -30,22 +31,28 @@ cv::Point RotatePoint(int x, int y, float centerX, float centerY, float angle)
 void DrawLine(cv::Mat img, std::vector<cv::Point> pointList)
 ;
 
-void DrawFace(cv::Mat img, PCNWindow face)
+void DrawFace(cv::Mat img, Window face)
 ;
 
-cv::Mat CropFace(cv::Mat img, PCNWindow face, int cropSize)
+cv::Mat CropFace(cv::Mat img, Window face, int cropSize)
 ;
 
 class PCN
 {
 public:
-    PCN(std::string model, std::string net1, std::string net2, std::string net3);
+    PCN(std::string modelDetect, std::string net1, std::string net2, std::string net3,
+        std::string modelTrack, std::string netTrack);
+    /// detection
     void SetMinFaceSize(int minFace);
-    void SetScoreThresh(float thresh1, float thresh2, float thresh3);
+    void SetDetectionThresh(float thresh1, float thresh2, float thresh3);
     void SetImagePyramidScaleFactor(float factor);
+    std::vector<Window> Detect(cv::Mat img);
+    /// tracking
+    void SetTrackingPeriod(int period);
+    void SetTrackingThresh(float thresh);
     void SetVideoSmooth(bool smooth);
-    std::vector<PCNWindow> DetectFace(cv::Mat img);
-
+    std::vector<Window> DetectTrack(cv::Mat img);
+    
 private:
     void* impl_;
 };
