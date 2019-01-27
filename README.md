@@ -14,11 +14,11 @@ A ported implementation of PCN face detection on caffe for iOS devices. Get from
 
 | Min face size | Number of faces| FPS        |
 | --------------|:--------------:|-----------:|
-| 85            | 1              |26-37 FPS   |
-| 100           | 1              |36-60 FPS   |
+|             | 1              |   |
+|            | 1              |   |
 | -             | -              |-           |
-| 85            | 3              |8-12 FPS    |
-| 100           | 3              |12-15 FPS   | 
+|             | 3              |    |
+|            | 3              |  | 
 
 <img src="https://github.com/elhoangvu/PCN-iOS/blob/master/Results/IMG_1650.PNG" width="32%"> <img src="https://github.com/elhoangvu/PCN-iOS/blob/master/Results/IMG_1644.PNG" width="32%"> <img src="https://github.com/elhoangvu/PCN-iOS/blob/master/Results/IMG_1645.PNG" width="32%">
 
