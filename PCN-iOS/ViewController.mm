@@ -52,7 +52,7 @@ using namespace cv;
     
     // You must free 'detector' point when needed
     detector = new PCN(pcnPath, pcnPath1, pcnPath2, pcnPath3);
-    detector->SetMinFaceSize(60);
+    detector->SetMinFaceSize(85);
     detector->SetScoreThresh(0.37, 0.43, 0.95);
     detector->SetImagePyramidScaleFactor(1.414);
     detector->SetVideoSmooth(true);
