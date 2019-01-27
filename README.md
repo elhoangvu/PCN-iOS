@@ -12,16 +12,16 @@ A ported implementation of PCN face detection on caffe for iOS devices. Get from
 - Camera capture preset: 640x480
 - Below talbe is a record about PCN benmark on iPhone 6S+ including cases of no face recognition.
 
-| Min face size | Number of faces| Time  | FPS        |
-| --------------|:--------------:|:-----:|-----------:|
-| 40            | 1              |       |11-14 FPS   |
-| 60            | 1              |       |18-27 FPS   |
-| 85            | 1              |       |26-37 FPS   |
-| 100           | 1              |       |36-60 FPS   |
-| 40            | 3              |       |            |
-| 60            | 3              |       |            |
-| 85            | 3              |       |            |
-| 100           | 3              |       |            | 
+| Min face size | Number of faces| FPS        |
+| --------------|:--------------:|-----------:|
+| 85            | 1              |26-37 FPS   |
+| 100           | 1              |36-60 FPS   |
+| -             | -              |-           |
+| 85            | 3              |8-12 FPS    |
+| 100           | 3              |12-15 FPS   | 
+
+<img src="https://github.com/elhoangvu/PCN-iOS/blob/master/Results/IMG_1650.PNG" width="32%"> <img src="https://github.com/elhoangvu/PCN-iOS/blob/master/Results/IMG_1644.PNG" width="32%"> <img src="https://github.com/elhoangvu/PCN-iOS/blob/master/Results/IMG_1645.PNG" width="32%">
+
 
 ### Usage
 
