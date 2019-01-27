@@ -1,6 +1,6 @@
 # PCN-iOS
 ## Real-Time Rotation-Invariant Face Detection
-A ported implementation of PCN face detection uses caffe for iOS devices. PCN (caffe version) is get from: https://github.com/Jack-CV/FaceKit
+Implementations of PCN face detection is ported to iOS using caffe. PCN (caffe version) is get from: https://github.com/Jack-CV/FaceKit
 
 ## Links
 - [FaceKit by Jack-CV](https://github.com/Jack-CV/FaceKit)
