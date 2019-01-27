@@ -2,7 +2,7 @@
 
 A ported implementation of PCN face detection on caffe for iOS devices. 
 
-## Resources
+## Links
 - [FaceKit by Jack-CV](https://github.com/Jack-CV/FaceKit)
 - [Real-Time Rotation-Invariant Face Detection and Tracking by Jack-CV](https://github.com/Jack-CV/FaceKit/tree/master/PCN)
 - [Caffe-iOS by lsy17096535](https://github.com/lsy17096535/Caffe-ios)
@@ -20,7 +20,7 @@ A ported implementation of PCN face detection on caffe for iOS devices.
 - OpenCV@2
 - Real-Time Rotation-Invariant Face Detection
 
-```
+---
 # Real-Time Rotation-Invariant Face Detection with Progressive Calibration Networks
 
 Progressive Calibration Networks (PCN) is an accurate rotation-invariant face detector running at real-time speed on CPU. This is an implementation for PCN.
@@ -61,8 +61,7 @@ Smooth the face boxes or not (smooth = true or false, recommend using it on vide
 - `detector.SetVideoSmooth(smooth);`
 
 See [picture.cpp](picture.cpp) and [video.cpp](video.cpp) for details. If you want to reproduce the results on FDDB, please run [fddb.cpp](fddb.cpp). You can rotate the images in FDDB to get FDDB-left, FDDB-right, and FDDB-down, then test PCN on them respectively. 
-
-```
+---
 
 
 ##### Thank authors: Jack-CV, lsy17096535
