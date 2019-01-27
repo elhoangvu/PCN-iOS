@@ -26,11 +26,7 @@
 		B712A95121FDC7A800FC65BD /* plugin.proto in Sources */ = {isa = PBXBuildFile; fileRef = B712A76D21FDC7A700FC65BD /* plugin.proto */; };
 		B712A95221FDC7A800FC65BD /* descriptor.proto in Sources */ = {isa = PBXBuildFile; fileRef = B712A77F21FDC7A700FC65BD /* descriptor.proto */; };
 		B712A95321FDC7A800FC65BD /* gpu_util.cuh in Resources */ = {isa = PBXBuildFile; fileRef = B712A7E021FDC7A700FC65BD /* gpu_util.cuh */; };
-		B712A95521FDC7A800FC65BD /* opencv2.zip in Resources */ = {isa = PBXBuildFile; fileRef = B712A81221FDC7A700FC65BD /* opencv2.zip */; };
-		B712A95621FDC7A800FC65BD /* opencv.zip in Resources */ = {isa = PBXBuildFile; fileRef = B712A81321FDC7A700FC65BD /* opencv.zip */; };
-		B712A95721FDC7A800FC65BD /* libopencv_core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B712A81521FDC7A700FC65BD /* libopencv_core.a */; };
 		B712A95821FDC7A800FC65BD /* libleveldb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B712A81621FDC7A700FC65BD /* libleveldb.a */; };
-		B712A95921FDC7A800FC65BD /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B712A81721FDC7A700FC65BD /* libzlib.a */; };
 		B712A95A21FDC7A800FC65BD /* libglog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B712A81C21FDC7A700FC65BD /* libglog.a */; };
 		B712A95B21FDC7A800FC65BD /* libprotobuf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B712A81D21FDC7A700FC65BD /* libprotobuf.a */; };
 		B712A95C21FDC7A800FC65BD /* libprotoc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B712A81E21FDC7A700FC65BD /* libprotoc.a */; };
@@ -458,25 +454,7 @@
 		B712A7FD21FDC7A700FC65BD /* filler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = filler.hpp; sourceTree = "<group>"; };
 		B712A7FE21FDC7A700FC65BD /* lmdb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lmdb.h; sourceTree = "<group>"; };
 		B712A7FF21FDC7A700FC65BD /* midl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = midl.h; sourceTree = "<group>"; };
-		B712A80421FDC7A700FC65BD /* env.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = env.h; sourceTree = "<group>"; };
-		B712A80521FDC7A700FC65BD /* status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = status.h; sourceTree = "<group>"; };
-		B712A80621FDC7A700FC65BD /* db.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = db.h; sourceTree = "<group>"; };
-		B712A80721FDC7A700FC65BD /* slice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slice.h; sourceTree = "<group>"; };
-		B712A80821FDC7A700FC65BD /* cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cache.h; sourceTree = "<group>"; };
-		B712A80921FDC7A700FC65BD /* write_batch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = write_batch.h; sourceTree = "<group>"; };
-		B712A80A21FDC7A700FC65BD /* options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = options.h; sourceTree = "<group>"; };
-		B712A80B21FDC7A700FC65BD /* dumpfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dumpfile.h; sourceTree = "<group>"; };
-		B712A80C21FDC7A700FC65BD /* c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = c.h; sourceTree = "<group>"; };
-		B712A80D21FDC7A700FC65BD /* filter_policy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = filter_policy.h; sourceTree = "<group>"; };
-		B712A80E21FDC7A700FC65BD /* comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = comparator.h; sourceTree = "<group>"; };
-		B712A80F21FDC7A700FC65BD /* table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = table.h; sourceTree = "<group>"; };
-		B712A81021FDC7A700FC65BD /* table_builder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = table_builder.h; sourceTree = "<group>"; };
-		B712A81121FDC7A700FC65BD /* iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iterator.h; sourceTree = "<group>"; };
-		B712A81221FDC7A700FC65BD /* opencv2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = opencv2.zip; sourceTree = "<group>"; };
-		B712A81321FDC7A700FC65BD /* opencv.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = opencv.zip; sourceTree = "<group>"; };
-		B712A81521FDC7A700FC65BD /* libopencv_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopencv_core.a; sourceTree = "<group>"; };
 		B712A81621FDC7A700FC65BD /* libleveldb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libleveldb.a; sourceTree = "<group>"; };
-		B712A81721FDC7A700FC65BD /* libzlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzlib.a; sourceTree = "<group>"; };
 		B712A81C21FDC7A700FC65BD /* libglog.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libglog.a; sourceTree = "<group>"; };
 		B712A81D21FDC7A700FC65BD /* libprotobuf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libprotobuf.a; sourceTree = "<group>"; };
 		B712A81E21FDC7A700FC65BD /* libprotoc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libprotoc.a; sourceTree = "<group>"; };
@@ -678,14 +656,12 @@
 				B712A18821FDB65100FC65BD /* Accelerate.framework in Frameworks */,
 				B712A18621FDB64000FC65BD /* AVFoundation.framework in Frameworks */,
 				B712A95C21FDC7A800FC65BD /* libprotoc.a in Frameworks */,
-				B712A95721FDC7A800FC65BD /* libopencv_core.a in Frameworks */,
 				B712A18421FDB63800FC65BD /* CoreMedia.framework in Frameworks */,
 				B712A95D21FDC7A800FC65BD /* libjpeg.a in Frameworks */,
 				B712A18221FDB63300FC65BD /* CoreVideo.framework in Frameworks */,
 				B712A18021FDB62D00FC65BD /* AssetsLibrary.framework in Frameworks */,
 				B747E41821FD789E00DE9CE2 /* opencv2.framework in Frameworks */,
 				B712A95A21FDC7A800FC65BD /* libglog.a in Frameworks */,
-				B712A95921FDC7A800FC65BD /* libzlib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1140,49 +1116,15 @@
 		B712A80121FDC7A700FC65BD /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				B712A80221FDC7A700FC65BD /* include */,
 				B712A81421FDC7A700FC65BD /* lib */,
 			);
 			path = ios;
 			sourceTree = "<group>";
 		};
-		B712A80221FDC7A700FC65BD /* include */ = {
-			isa = PBXGroup;
-			children = (
-				B712A80321FDC7A700FC65BD /* leveldb */,
-				B712A81221FDC7A700FC65BD /* opencv2.zip */,
-				B712A81321FDC7A700FC65BD /* opencv.zip */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		B712A80321FDC7A700FC65BD /* leveldb */ = {
-			isa = PBXGroup;
-			children = (
-				B712A80421FDC7A700FC65BD /* env.h */,
-				B712A80521FDC7A700FC65BD /* status.h */,
-				B712A80621FDC7A700FC65BD /* db.h */,
-				B712A80721FDC7A700FC65BD /* slice.h */,
-				B712A80821FDC7A700FC65BD /* cache.h */,
-				B712A80921FDC7A700FC65BD /* write_batch.h */,
-				B712A80A21FDC7A700FC65BD /* options.h */,
-				B712A80B21FDC7A700FC65BD /* dumpfile.h */,
-				B712A80C21FDC7A700FC65BD /* c.h */,
-				B712A80D21FDC7A700FC65BD /* filter_policy.h */,
-				B712A80E21FDC7A700FC65BD /* comparator.h */,
-				B712A80F21FDC7A700FC65BD /* table.h */,
-				B712A81021FDC7A700FC65BD /* table_builder.h */,
-				B712A81121FDC7A700FC65BD /* iterator.h */,
-			);
-			path = leveldb;
-			sourceTree = "<group>";
-		};
 		B712A81421FDC7A700FC65BD /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				B712A81521FDC7A700FC65BD /* libopencv_core.a */,
 				B712A81621FDC7A700FC65BD /* libleveldb.a */,
-				B712A81721FDC7A700FC65BD /* libzlib.a */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -1570,7 +1512,6 @@
 				B712AA4B21FDC7A900FC65BD /* nesterov_solver.cu in Resources */,
 				B712AA4921FDC7A900FC65BD /* adam_solver.cu in Resources */,
 				B712A9D921FDC7A800FC65BD /* absval_layer.cu in Resources */,
-				B712A95621FDC7A800FC65BD /* opencv.zip in Resources */,
 				B712A99121FDC7A800FC65BD /* embed_layer.cu in Resources */,
 				B747E40B21FD77AC00DE9CE2 /* Assets.xcassets in Resources */,
 				B712A96E21FDC7A800FC65BD /* softmax_loss_layer.cu in Resources */,
@@ -1589,7 +1530,6 @@
 				B712A97F21FDC7A800FC65BD /* elu_layer.cu in Resources */,
 				B712AA4821FDC7A900FC65BD /* adadelta_solver.cu in Resources */,
 				B712A98A21FDC7A800FC65BD /* cudnn_softmax_layer.cu in Resources */,
-				B712A95521FDC7A800FC65BD /* opencv2.zip in Resources */,
 				B712A9D521FDC7A800FC65BD /* conv_layer.cu in Resources */,
 				B747E4D321FD792300DE9CE2 /* PCN-1.prototxt in Resources */,
 				B712A99921FDC7A800FC65BD /* split_layer.cu in Resources */,

@@ -38,7 +38,7 @@ using namespace cv;
     
     self.videoCamera = [[CvVideoCamera alloc] initWithParentView:self.cameraView];
     self.videoCamera.delegate = self;
-    self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
+    self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
     self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset640x480;
     self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
     self.videoCamera.defaultFPS = 30;
@@ -52,7 +52,7 @@ using namespace cv;
     
     // You must free 'detector' point when needed
     detector = new PCN(pcnPath, pcnPath1, pcnPath2, pcnPath3);
-    detector->SetMinFaceSize(85);
+    detector->SetMinFaceSize(100);
     detector->SetScoreThresh(0.37, 0.43, 0.95);
     detector->SetImagePyramidScaleFactor(1.414);
     detector->SetVideoSmooth(true);
@@ -64,11 +64,10 @@ using namespace cv;
 
 - (void)processImage:(cv::Mat &)image
 {
-    
-    
-    cv::Mat img = image;
+    cv::Mat img;
+
     if (image.channels() == 4) {
-        cvtColor(image, img, cv::COLOR_RGBA2BGR);
+        cvtColor(image, img, cv::COLOR_BGRA2RGB);
     }
     
     NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
@@ -82,7 +81,6 @@ using namespace cv;
     
     for (int i = 0; i < faces.size(); i++)
     {
-        std::cout << faces[i].width << endl;
         DrawFace(image, faces[i]);
     }
 }
