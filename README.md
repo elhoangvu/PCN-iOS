@@ -22,6 +22,24 @@ A ported implementation of PCN face detection on caffe for iOS devices. Get from
 | 80            | 3              |       |     |
 | 100           | 3              |       |     |
 
+### Usage
+
+Set minimum size of faces to detect (`size` >= 20)
+
+- `detector.SetMinFaceSize(size);`
+  
+Set scaling factor of image pyramid (1.4 <= `factor` <= 1.6)
+  
+- `detector.SetImagePyramidScaleFactor(factor);`
+  
+Set score threshold of detected faces (0 <= `thresh1`, `thresh2`, `thresh3` <= 1)
+  
+- `detector.SetScoreThresh(thresh1, thresh2, thresh3);`
+
+Smooth the face boxes or not (smooth = true or false, recommend using it on video to get stabler face boxes)
+  
+- `detector.SetVideoSmooth(smooth);`
+
 ## Note
 ##### You can replace caffe-ios by another caffe-ios implementation to reduce speed, performance, stability,...
 ##### The current caffe-ios lib is used with CPU_ONLY mode only because iOS platform don't support CUDA. 
