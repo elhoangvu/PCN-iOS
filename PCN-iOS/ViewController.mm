@@ -64,14 +64,12 @@ using namespace cv;
 
 - (void)processImage:(cv::Mat &)image
 {
-    cv::Mat img;
-
     if (image.channels() == 4) {
-        cvtColor(image, img, cv::COLOR_BGRA2RGB);
+        cvtColor(image, image, cv::COLOR_BGRA2RGB);
     }
     
     NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
-    auto faces = detector->DetectFace(img);
+    auto faces = detector->DetectFace(image);
     NSTimeInterval end = [NSDate timeIntervalSinceReferenceDate];
     
     NSString* fps = [NSString stringWithFormat:@"FPS: %f", 1.0f/(end - start)];
