@@ -21,7 +21,7 @@ struct Window
     int x, y, width;
     float angle, score;
     Window(int x_, int y_, int w_, float a_, float s_)
-    : x(x_), y(y_), width(w_), angle(a_), score(s_)
+        : x(x_), y(y_), width(w_), angle(a_), score(s_)
     {}
 };
 
@@ -52,7 +52,7 @@ public:
     void SetTrackingThresh(float thresh);
     void SetVideoSmooth(bool smooth);
     std::vector<Window> DetectTrack(cv::Mat img);
-    
+
 private:
     void* impl_;
 };

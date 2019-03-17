@@ -5,9 +5,68 @@ struct Window2
     int x, y, w, h;
     float angle, scale, conf;
     Window2(int x_, int y_, int w_, int h_, float a_, float s_, float c_)
-    : x(x_), y(y_), w(w_), h(h_), angle(a_), scale(s_), conf(c_)
+        : x(x_), y(y_), w(w_), h(h_), angle(a_), scale(s_), conf(c_)
     {}
 };
+
+cv::Point RotatePoint(int x, int y, float centerX, float centerY, float angle)
+{
+    x -= centerX;
+    y -= centerY;
+    float theta = -angle * M_PI / 180;
+    int rx = int(centerX + x * std::cos(theta) - y * std::sin(theta));
+    int ry = int(centerY + x * std::sin(theta) + y * std::cos(theta));
+    return cv::Point(rx, ry);
+}
+
+void DrawLine(cv::Mat img, std::vector<cv::Point> pointList)
+{
+    int thick = 2;
+    CvScalar cyan = CV_RGB(0, 255, 255);
+    CvScalar blue = CV_RGB(0, 0, 255);
+    cv::line(img, pointList[0], pointList[1], cyan, thick);
+    cv::line(img, pointList[1], pointList[2], cyan, thick);
+    cv::line(img, pointList[2], pointList[3], cyan, thick);
+    cv::line(img, pointList[3], pointList[0], blue, thick);
+}
+
+void DrawFace(cv::Mat img, Window face)
+{
+    int x1 = face.x;
+    int y1 = face.y;
+    int x2 = face.width + face.x - 1;
+    int y2 = face.width + face.y - 1;
+    int centerX = (x1 + x2) / 2;
+    int centerY = (y1 + y2) / 2;
+    std::vector<cv::Point> pointList;
+    pointList.push_back(RotatePoint(x1, y1, centerX, centerY, face.angle));
+    pointList.push_back(RotatePoint(x1, y2, centerX, centerY, face.angle));
+    pointList.push_back(RotatePoint(x2, y2, centerX, centerY, face.angle));
+    pointList.push_back(RotatePoint(x2, y1, centerX, centerY, face.angle));
+    DrawLine(img, pointList);
+}
+
+cv::Mat CropFace(cv::Mat img, Window face, int cropSize)
+{
+    int x1 = face.x;
+    int y1 = face.y;
+    int x2 = face.width + face.x - 1;
+    int y2 = face.width + face.y - 1;
+    int centerX = (x1 + x2) / 2;
+    int centerY = (y1 + y2) / 2;
+    cv::Point2f srcTriangle[3];
+    cv::Point2f dstTriangle[3];
+    srcTriangle[0] = RotatePoint(x1, y1, centerX, centerY, face.angle);
+    srcTriangle[1] = RotatePoint(x1, y2, centerX, centerY, face.angle);
+    srcTriangle[2] = RotatePoint(x2, y2, centerX, centerY, face.angle);
+    dstTriangle[0] = cv::Point(0, 0);
+    dstTriangle[1] = cv::Point(0, cropSize - 1);
+    dstTriangle[2] = cv::Point(cropSize - 1, cropSize - 1);
+    cv::Mat rotMat = cv::getAffineTransform(srcTriangle, dstTriangle);
+    cv::Mat ret;
+    cv::warpAffine(img, ret, rotMat, cv::Size(cropSize, cropSize));
+    return ret;
+}
 
 class Impl
 {
@@ -37,7 +96,7 @@ public:
     std::vector<Window2> Detect(cv::Mat img, cv::Mat imgPad);
     std::vector<Window2> Track(cv::Mat img, caffe::shared_ptr<caffe::Net<float> > &net,
                                float thres, int dim, std::vector<Window2> &winList);
-    
+
     caffe::shared_ptr<caffe::Net<float> > net_[4];
     int minFace_;
     float scale_;
@@ -49,6 +108,7 @@ public:
     int period_;
     float trackThreshold_;
     float augScale_;
+    cv::Scalar mean_;
 };
 
 PCN::PCN(std::string modelDetect, std::string net1, std::string net2, std::string net3,
@@ -83,6 +143,7 @@ void PCN::SetDetectionThresh(float thresh1, float thresh2, float thresh3)
     p->stride_ = 8;
     p->angleRange_ = 45;
     p->augScale_ = 0.15;
+    p->mean_ = cv::Scalar(104, 117, 123);
 }
 
 void PCN::SetImagePyramidScaleFactor(float factor)
@@ -108,7 +169,7 @@ std::vector<Window> PCN::Detect(cv::Mat img)
     Impl *p = (Impl *)impl_;
     cv::Mat imgPad = p->PadImg(img);
     std::vector<Window2> winList = p->Detect(img, imgPad);
-    
+
     if (p->stable_)
     {
         winList = p->SmoothWindow(winList);
@@ -120,11 +181,11 @@ std::vector<Window> PCN::DetectTrack(cv::Mat img)
 {
     Impl *p = (Impl *)impl_;
     cv::Mat imgPad = p->PadImg(img);
-    
+
     static int detectFlag = p->period_;
     static std::vector<Window2> preList;
     std::vector<Window2> winList = p->Track(imgPad, p->net_[3], p->trackThreshold_, 72, preList);
-    
+
     if (detectFlag == p->period_)
     {
         std::vector<Window2> tmpList = p->Detect(img, imgPad);
@@ -133,7 +194,7 @@ std::vector<Window> PCN::DetectTrack(cv::Mat img)
             winList.push_back(tmpList[i]);
         }
     }
-    
+
     winList = p->NMS(winList, false, p->nmsThreshold_[2]);
     winList = p->DeleteFP(winList);
     preList = winList;
@@ -153,23 +214,23 @@ void Impl::LoadModel(std::string modelDetect, std::string net1, std::string net2
     caffe::Caffe::set_mode(caffe::Caffe::CPU);
     google::InitGoogleLogging("VR");
     FLAGS_logtostderr = 0;
-    
+
     net_[0].reset(new caffe::Net<float>(net1.c_str(), caffe::TEST));
     net_[0]->CopyTrainedLayersFrom(modelDetect.c_str());
     net_[1].reset(new caffe::Net<float>(net2.c_str(), caffe::TEST));
     net_[1]->CopyTrainedLayersFrom(modelDetect.c_str());
     net_[2].reset(new caffe::Net<float>(net3.c_str(), caffe::TEST));
     net_[2]->CopyTrainedLayersFrom(modelDetect.c_str());
-    
+
     net_[3].reset(new caffe::Net<float>(netTrack.c_str(), caffe::TEST));
     net_[3]->CopyTrainedLayersFrom(modelTrack.c_str());
-    
+
     google::ShutdownGoogleLogging();
 }
 
 cv::Mat Impl::PreProcessImg(cv::Mat img)
 {
-    cv::Mat mean(img.size(), CV_32FC3, cv::Scalar(104, 117, 123));
+    cv::Mat mean(img.size(), CV_32FC3, mean_);
     cv::Mat imgF;
     img.convertTo(imgF, CV_32FC3);
     return imgF - mean;
@@ -179,7 +240,7 @@ cv::Mat Impl::PreProcessImg(cv::Mat img, int dim)
 {
     cv::Mat imgNew;
     cv::resize(img, imgNew, cv::Size(dim, dim));
-    cv::Mat mean(imgNew.size(), CV_32FC3, cv::Scalar(104, 117, 123));
+    cv::Mat mean(imgNew.size(), CV_32FC3, mean_);
     cv::Mat imgF;
     imgNew.convertTo(imgF, CV_32FC3);
     return imgF - mean;
@@ -329,7 +390,7 @@ cv::Mat Impl::PadImg(cv::Mat img)
     int row = std::min(int(img.rows * 0.2), 100);
     int col = std::min(int(img.cols * 0.2), 100);
     cv::Mat ret;
-    cv::copyMakeBorder(img, ret, row, row, col, col, cv::BORDER_CONSTANT);
+    cv::copyMakeBorder(img, ret, row, row, col, col, cv::BORDER_CONSTANT, mean_);
     return ret;
 }
 
@@ -514,7 +575,7 @@ std::vector<Window2> Impl::Stage3(cv::Mat img, cv::Mat img180, cv::Mat img90, cv
                 cropY = width - 1 - (winList[i].x + winList[i].w - 1);
                 imgTmp = imgNeg90;
             }
-            
+
             int w = int(sn * cropW);
             int x = int(cropX  - 0.5 * sn * cropW + cropW * sn * xn + 0.5 * cropW);
             int y = int(cropY  - 0.5 * sn * cropW + cropW * sn * yn + 0.5 * cropW);
@@ -545,7 +606,7 @@ std::vector<Window> Impl::TransWindow(cv::Mat img, cv::Mat imgPad, std::vector<W
 {
     int row = (imgPad.rows - img.rows) / 2;
     int col = (imgPad.cols - img.cols) / 2;
-    
+
     std::vector<Window> ret;
     for(int i = 0; i < winList.size(); i++)
     {
@@ -592,13 +653,13 @@ std::vector<Window2> Impl::Detect(cv::Mat img, cv::Mat imgPad)
     cv::flip(imgPad, img180, 0);
     cv::transpose(imgPad, img90);
     cv::flip(img90, imgNeg90, 0);
-    
+
     std::vector<Window2> winList = Stage1(img, imgPad, net_[0], classThreshold_[0]);
     winList = NMS(winList, true, nmsThreshold_[0]);
-    
+
     winList = Stage2(imgPad, img180, net_[1], classThreshold_[1], 24, winList);
     winList = NMS(winList, true, nmsThreshold_[1]);
-    
+
     winList = Stage3(imgPad, img180, img90, imgNeg90, net_[2], classThreshold_[2], 48, winList);
     winList = NMS(winList, false, nmsThreshold_[2]);
     winList = DeleteFP(winList);
@@ -652,62 +713,5 @@ std::vector<Window2> Impl::Track(cv::Mat img, caffe::shared_ptr<caffe::Net<float
     return ret;
 }
 
-cv::Point RotatePoint(int x, int y, float centerX, float centerY, float angle)
-{
-    x -= centerX;
-    y -= centerY;
-    float theta = -angle * M_PI / 180;
-    int rx = int(centerX + x * std::cos(theta) - y * std::sin(theta));
-    int ry = int(centerY + x * std::sin(theta) + y * std::cos(theta));
-    return cv::Point(rx, ry);
-}
 
-void DrawLine(cv::Mat img, std::vector<cv::Point> pointList)
-{
-    int thick = 2;
-    CvScalar cyan = CV_RGB(0, 255, 255);
-    CvScalar blue = CV_RGB(0, 0, 255);
-    cv::line(img, pointList[0], pointList[1], cyan, thick);
-    cv::line(img, pointList[1], pointList[2], cyan, thick);
-    cv::line(img, pointList[2], pointList[3], cyan, thick);
-    cv::line(img, pointList[3], pointList[0], blue, thick);
-}
-
-void DrawFace(cv::Mat img, Window face)
-{
-    int x1 = face.x;
-    int y1 = face.y;
-    int x2 = face.width + face.x - 1;
-    int y2 = face.width + face.y - 1;
-    int centerX = (x1 + x2) / 2;
-    int centerY = (y1 + y2) / 2;
-    std::vector<cv::Point> pointList;
-    pointList.push_back(RotatePoint(x1, y1, centerX, centerY, face.angle));
-    pointList.push_back(RotatePoint(x1, y2, centerX, centerY, face.angle));
-    pointList.push_back(RotatePoint(x2, y2, centerX, centerY, face.angle));
-    pointList.push_back(RotatePoint(x2, y1, centerX, centerY, face.angle));
-    DrawLine(img, pointList);
-}
-
-cv::Mat CropFace(cv::Mat img, Window face, int cropSize)
-{
-    int x1 = face.x;
-    int y1 = face.y;
-    int x2 = face.width + face.x - 1;
-    int y2 = face.width + face.y - 1;
-    int centerX = (x1 + x2) / 2;
-    int centerY = (y1 + y2) / 2;
-    cv::Point2f srcTriangle[3];
-    cv::Point2f dstTriangle[3];
-    srcTriangle[0] = RotatePoint(x1, y1, centerX, centerY, face.angle);
-    srcTriangle[1] = RotatePoint(x1, y2, centerX, centerY, face.angle);
-    srcTriangle[2] = RotatePoint(x2, y2, centerX, centerY, face.angle);
-    dstTriangle[0] = cv::Point(0, 0);
-    dstTriangle[1] = cv::Point(0, cropSize - 1);
-    dstTriangle[2] = cv::Point(cropSize - 1, cropSize - 1);
-    cv::Mat rotMat = cv::getAffineTransform(srcTriangle, dstTriangle);
-    cv::Mat ret;
-    cv::warpAffine(img, ret, rotMat, cv::Size(cropSize, cropSize));
-    return ret;
-}
 

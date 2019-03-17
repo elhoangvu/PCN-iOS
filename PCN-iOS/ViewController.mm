@@ -38,7 +38,7 @@ using namespace cv;
     
     self.videoCamera = [[CvVideoCamera alloc] initWithParentView:self.cameraView];
     self.videoCamera.delegate = self;
-    self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
+    self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
     self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset640x480;
     self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
     self.videoCamera.defaultFPS = 30;
@@ -54,11 +54,11 @@ using namespace cv;
     
     // You must free 'detector' pointer when needed
     detector = new PCN(pcnPath, pcnPath1, pcnPath2, pcnPath3, pcnPath4, pcnPath5);
-    detector->SetMinFaceSize(45);
+    detector->SetMinFaceSize(80);
     detector->SetImagePyramidScaleFactor(1.414);
     detector->SetDetectionThresh(0.37, 0.43, 0.97);
     /// tracking
-    detector->SetTrackingPeriod(30);
+    detector->SetTrackingPeriod(20);
     detector->SetTrackingThresh(0.95);
     detector->SetVideoSmooth(true);
 }

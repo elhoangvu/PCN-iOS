@@ -208,7 +208,7 @@
 		B747E4D221FD792300DE9CE2 /* PCN-3.prototxt in Resources */ = {isa = PBXBuildFile; fileRef = B747E4A121FD792200DE9CE2 /* PCN-3.prototxt */; };
 		B747E4D321FD792300DE9CE2 /* PCN-1.prototxt in Resources */ = {isa = PBXBuildFile; fileRef = B747E4A221FD792200DE9CE2 /* PCN-1.prototxt */; };
 		B747E4D421FD792300DE9CE2 /* PCN.caffemodel in Resources */ = {isa = PBXBuildFile; fileRef = B747E4A321FD792200DE9CE2 /* PCN.caffemodel */; };
-		B747E4D521FD792300DE9CE2 /* PCN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B747E4A421FD792200DE9CE2 /* PCN.cpp */; };
+		B759206B223EAA4A0001E3A0 /* PCN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7592069223EAA4A0001E3A0 /* PCN.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -638,7 +638,6 @@
 		B747E40F21FD77AC00DE9CE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B747E41021FD77AC00DE9CE2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B747E41721FD789E00DE9CE2 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = SOURCE_ROOT; };
-		B747E49721FD792200DE9CE2 /* PCN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCN.h; sourceTree = "<group>"; };
 		B747E49921FD792200DE9CE2 /* tempDiscROC.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tempDiscROC.txt; sourceTree = "<group>"; };
 		B747E49A21FD792200DE9CE2 /* detList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = detList.txt; sourceTree = "<group>"; };
 		B747E49B21FD792200DE9CE2 /* tempContROC.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tempContROC.txt; sourceTree = "<group>"; };
@@ -646,7 +645,8 @@
 		B747E4A121FD792200DE9CE2 /* PCN-3.prototxt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "PCN-3.prototxt"; sourceTree = "<group>"; };
 		B747E4A221FD792200DE9CE2 /* PCN-1.prototxt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "PCN-1.prototxt"; sourceTree = "<group>"; };
 		B747E4A321FD792200DE9CE2 /* PCN.caffemodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = PCN.caffemodel; sourceTree = "<group>"; };
-		B747E4A421FD792200DE9CE2 /* PCN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PCN.cpp; sourceTree = "<group>"; };
+		B7592069223EAA4A0001E3A0 /* PCN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PCN.cpp; sourceTree = "<group>"; };
+		B759206A223EAA4A0001E3A0 /* PCN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCN.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1402,8 +1402,8 @@
 		B747E46E21FD792200DE9CE2 /* PCN */ = {
 			isa = PBXGroup;
 			children = (
-				B747E49721FD792200DE9CE2 /* PCN.h */,
-				B747E4A421FD792200DE9CE2 /* PCN.cpp */,
+				B7592069223EAA4A0001E3A0 /* PCN.cpp */,
+				B759206A223EAA4A0001E3A0 /* PCN.h */,
 				B747E49821FD792200DE9CE2 /* ROC */,
 				B747E49F21FD792200DE9CE2 /* model */,
 			);
@@ -1573,7 +1573,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B712AA3E21FDC7A900FC65BD /* insert_splits.cpp in Sources */,
-				B747E4D521FD792300DE9CE2 /* PCN.cpp in Sources */,
 				B712A9E221FDC7A800FC65BD /* caffe.proto in Sources */,
 				B712A9A121FDC7A800FC65BD /* threshold_layer.cpp in Sources */,
 				B712A9DD21FDC7A800FC65BD /* lstm_layer.cpp in Sources */,
@@ -1582,6 +1581,7 @@
 				B712A9CE21FDC7A800FC65BD /* split_layer.cpp in Sources */,
 				B712AA4021FDC7A900FC65BD /* blob.cpp in Sources */,
 				B712A9C521FDC7A800FC65BD /* loss_layer.cpp in Sources */,
+				B759206B223EAA4A0001E3A0 /* PCN.cpp in Sources */,
 				B712A97D21FDC7A800FC65BD /* deconv_layer.cpp in Sources */,
 				B712A98321FDC7A800FC65BD /* inner_product_layer.cpp in Sources */,
 				B712A96C21FDC7A800FC65BD /* spp_layer.cpp in Sources */,
@@ -1863,7 +1863,7 @@
 					"$(PROJECT_DIR)/caffe/ios/lib",
 					"$(PROJECT_DIR)/caffe/osx/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.HoangVu.FaceDetection;
+				PRODUCT_BUNDLE_IDENTIFIER = com.HoangVu.PCNFaceDetection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = (
@@ -1905,7 +1905,7 @@
 					"$(PROJECT_DIR)/caffe/ios/lib",
 					"$(PROJECT_DIR)/caffe/osx/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.HoangVu.FaceDetection;
+				PRODUCT_BUNDLE_IDENTIFIER = com.HoangVu.PCNFaceDetection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = (
