@@ -9,7 +9,7 @@ Implementations of PCN face detection is ported to iOS using caffe. PCN (caffe v
 
 ## Results (on iPhone 6S+)
 - iPhone 6S+
-- Camera capture preset: 640x480
+- Camera capture preset: 640x480 (1280x720 or larger sizes)
 - Below talbe is a record about quick PCN benchmarks on iPhone 6S+.
 
 | Min face size | Number of faces| FPS ~      |
@@ -50,7 +50,7 @@ See [picture.cpp](picture.cpp) and [video.cpp](video.cpp) for details. If you wa
 ##### The current caffe-ios lib is used with CPU_ONLY mode only because iOS platform don't support CUDA. 
 
 ## Issues
-- Some faces are difficult to detect.
+- Some faces are difficult to detect (this was greatly improved on the previous commit).
 
 ## More infos
 - XCode 10.1
@@ -60,7 +60,7 @@ See [picture.cpp](picture.cpp) and [video.cpp](video.cpp) for details. If you wa
 - Caffe iOS
 - Real-Time Rotation-Invariant Face Detection
 
-### Thank authors: Jack-CV, lsy17096535
+### Thank authors: Jack-CV (PCN), lsy17096535 (caffe-iOS)
 
 ### Citing PCN
     @inproceedings{shiCVPR18pcn,
